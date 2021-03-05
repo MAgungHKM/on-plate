@@ -9,7 +9,7 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory<OnPlateUseCase> { OnPlateInteractor(get()) }
+    single<OnPlateUseCase> { OnPlateInteractor(get()) }
 }
 
 val viewModelModule = module {

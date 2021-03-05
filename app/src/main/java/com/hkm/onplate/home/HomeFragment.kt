@@ -105,40 +105,61 @@ class HomeFragment : Fragment() {
                     run {
                         homeViewModel.emptyAutoCompleteResults()
                         val searchQuery = query.toString()
-                        if (!isDelayed && searchQuery.trim().isNotEmpty() && searchQuery.length > 3) {
+                        if (!isDelayed && searchQuery.trim()
+                                .isNotEmpty() && searchQuery.length > 3
+                        ) {
                             milliSecondDelay(1500L)
-                            homeViewModel.search(searchQuery).observe(viewLifecycleOwner, { autocompleteResult ->
-                                if (autocompleteResult != null) {
-                                    when (autocompleteResult) {
-                                        is Resource.Loading -> binding.progressBarRecipe.visibility = View.VISIBLE
-                                        is Resource.Success -> {
-                                            binding.progressBarRecipe.visibility = View.GONE
-                                            val data = autocompleteResult.data
-                                            if (!data.isNullOrEmpty()) {
-                                                val adapter = SearchAdapter(requireActivity(), android.R.layout.select_dialog_item, DataMapper.mapRecipeDomainsToItsPresentation(data))
-                                                adapter.notifyDataSetChanged()
-                                                setAdapter(adapter)
-                                            } else {
-                                                val placeholder = ArrayList<PresentationRecipe>()
-                                                placeholder.add(PresentationRecipe(
-                                                        title = requireContext().getString(R.string.no_recipe)
+                            homeViewModel.search(searchQuery).observe(
+                                viewLifecycleOwner,
+                                { autocompleteResult ->
+                                    if (autocompleteResult != null) {
+                                        when (autocompleteResult) {
+                                            is Resource.Loading -> binding.progressBarRecipe.visibility =
+                                                View.VISIBLE
+                                            is Resource.Success -> {
+                                                binding.progressBarRecipe.visibility = View.GONE
+                                                val data = autocompleteResult.data
+                                                if (!data.isNullOrEmpty()) {
+                                                    val adapter = SearchAdapter(
+                                                        requireActivity(),
+                                                        android.R.layout.select_dialog_item,
+                                                        DataMapper.mapRecipeDomainsToItsPresentation(
+                                                            data
+                                                        )
                                                     )
-                                                )
+                                                    adapter.notifyDataSetChanged()
+                                                    setAdapter(adapter)
+                                                    showDropDown()
+                                                } else {
+                                                    val placeholder =
+                                                        ArrayList<PresentationRecipe>()
+                                                    placeholder.add(
+                                                        PresentationRecipe(
+                                                            title = requireContext().getString(R.string.no_recipe)
+                                                        )
+                                                    )
 
-                                                val adapter = SearchAdapter(requireActivity(), android.R.layout.select_dialog_item, placeholder)
-                                                adapter.notifyDataSetChanged()
-                                                setAdapter(adapter)
+                                                    val adapter = SearchAdapter(
+                                                        requireActivity(),
+                                                        android.R.layout.select_dialog_item,
+                                                        placeholder
+                                                    )
+                                                    adapter.notifyDataSetChanged()
+                                                    setAdapter(adapter)
+                                                    showDropDown()
+                                                }
+                                            }
+                                            is Resource.Error -> {
+                                                binding.progressBarRecipe.visibility = View.GONE
+                                                Toast.makeText(
+                                                    context,
+                                                    "Uh oh...",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             }
                                         }
-                                        is Resource.Error -> {
-                                            binding.progressBarRecipe.visibility = View.GONE
-                                            Toast.makeText(context,
-                                                "Uh oh...",
-                                                Toast.LENGTH_SHORT).show()
-                                        }
                                     }
-                                }
-                            })
+                                })
                         }
                     }
                 }, {})
@@ -217,7 +238,8 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        binding.rvRecipe.adapter = null
         _binding = null
+        super.onDestroyView()
     }
 }

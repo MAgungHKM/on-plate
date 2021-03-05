@@ -23,6 +23,9 @@ buildscript {
         lifecycle_version = "2.3.0"
         paging_version = '2.1.2'
         jsoup_version = '1.13.1'
+        leak_canary_version = '2.6'
+        sqlite_version = '2.1.0'
+        sqlcipher_version = '4.4.3'
     }
     repositories {
         google()

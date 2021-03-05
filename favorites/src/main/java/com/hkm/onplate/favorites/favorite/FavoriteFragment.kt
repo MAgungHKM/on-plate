@@ -139,8 +139,9 @@ class FavoriteFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        binding.rvRecipe.adapter = null
         _binding = null
         unloadKoinModules(favoritesModule)
+        super.onDestroyView()
     }
 }
