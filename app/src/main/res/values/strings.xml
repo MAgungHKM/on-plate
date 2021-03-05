@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">OnPlate</string>
-    <string name="empty_string"></string>
+    <string name="empty_string" />
     <string name="favorite_menu">Favorite</string>
     <string name="dummy_recipe_name">Vegetable Salad with Spicy Peanut Sauce</string>
     <string name="dummy_summary">This is a very delicate dish in Indonesia since time immemorial known to bring fortune to the one consuming it.</string>
@@ -20,6 +20,7 @@
     <string name="share_title">Share this recipe now!</string>
     <string name="text_add_favorite">%s has been added to favorite list.</string>
     <string name="text_remove_favorite">%s has been removed from favorite list.</string>
-    <string name="hint_search">Search recipe here...</string>
+    <string name="hint_search">Search recipe here…</string>
     <string name="no_recipe">Recipe not found.</string>
+    <string name="theme_menu">Theme</string>
 </resources>

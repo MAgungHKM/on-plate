@@ -2,7 +2,6 @@ package com.hkm.onplate
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.hkm.onplate.databinding.ActivityMainBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -12,7 +11,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -20,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mainViewModel.emptyRecipes()
         mainViewModel.emptyAutoCompleteResults()
     }
 }

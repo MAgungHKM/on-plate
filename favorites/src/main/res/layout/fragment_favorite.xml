@@ -45,7 +45,7 @@
         android:paddingHorizontal="8dp"
         android:layout_marginHorizontal="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="@color/colorTextTertiary"
         android:textSize="20sp"
         android:visibility="gone"
         android:textAlignment="center"

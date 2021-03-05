@@ -1,10 +1,12 @@
 package com.hkm.onplate.home
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -213,6 +215,13 @@ class HomeFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
+        inflater.inflate(R.menu.theme_menu, menu)
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES ->
+                menu.getItem(1).setIcon(R.drawable.ic_moon_white)
+            Configuration.UI_MODE_NIGHT_NO ->
+                menu.getItem(1).setIcon(R.drawable.ic_sun_white)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -220,8 +229,17 @@ class HomeFragment : Fragment() {
         return when (item.itemId) {
             R.id.menu_favorite -> {
                 val toFavoriteFragment =
-                        HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+                    HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
                 view?.findNavController()?.navigate(toFavoriteFragment)
+                true
+            }
+            R.id.menu_theme -> {
+                when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    Configuration.UI_MODE_NIGHT_NO ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

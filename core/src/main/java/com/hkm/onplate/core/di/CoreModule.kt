@@ -5,6 +5,7 @@ import com.hkm.onplate.core.data.OnPlateRepository
 import com.hkm.onplate.core.data.source.local.LocalDataSource
 import com.hkm.onplate.core.data.source.local.room.OnPlateDatabase
 import com.hkm.onplate.core.data.source.remote.RemoteDataSource
+import com.hkm.onplate.core.data.source.remote.network.ApiConfig
 import com.hkm.onplate.core.data.source.remote.network.ApiConfig.Companion.provideApiService
 import com.hkm.onplate.core.domain.repository.IOnPlateRepository
 import com.hkm.onplate.core.utils.AppExecutors
@@ -28,6 +29,7 @@ val databaseModule = module {
 }
 
 val networkModule = module {
+    single { ApiConfig }
     single { provideApiService() }
 }
 

@@ -1,11 +1,13 @@
 package com.hkm.onplate.detail
 
+import android.content.res.Configuration
 import android.graphics.Outline
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -190,10 +192,30 @@ class DetailFragment : Fragment() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.theme_menu, menu)
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES ->
+                menu.getItem(0).setIcon(R.drawable.ic_moon_white)
+            Configuration.UI_MODE_NIGHT_NO ->
+                menu.getItem(0).setIcon(R.drawable.ic_sun_white)
+        }
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 requireActivity().onBackPressed()
+                true
+            }
+            R.id.menu_theme -> {
+                when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    Configuration.UI_MODE_NIGHT_NO ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

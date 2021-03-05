@@ -1,10 +1,12 @@
 package com.hkm.onplate.favorites.favorite
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.hkm.onplate.favorites.di.favoritesModule
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import com.hkm.onplate.R as OnplateR
 
 class FavoriteFragment : Fragment() {
     private lateinit var recipeAdapter: RecipeAdapter
@@ -103,20 +106,37 @@ class FavoriteFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.favorite_menu, menu)
+        inflater.inflate(OnplateR.menu.theme_menu, menu)
+        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES ->
+                menu.getItem(1).setIcon(OnplateR.drawable.ic_moon_white)
+            Configuration.UI_MODE_NIGHT_NO ->
+                menu.getItem(1).setIcon(OnplateR.drawable.ic_sun_white)
+        }
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                val toHomeFragment = FavoriteFragmentDirections.actionFavoriteFragmentToHomeFragment()
+                val toHomeFragment =
+                    FavoriteFragmentDirections.actionFavoriteFragmentToHomeFragment()
                 view?.findNavController()?.navigate(toHomeFragment)
+                true
+            }
+            OnplateR.id.menu_theme -> {
+                when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    Configuration.UI_MODE_NIGHT_NO ->
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
                 true
             }
             R.id.menu_delete_all -> {
                 val mAlertDialog: AlertDialog
                 val mBuilder: AlertDialog.Builder =
-                        AlertDialog.Builder(requireActivity(), R.style.MyPopupMenu)
+                    AlertDialog.Builder(requireActivity(), R.style.MyPopupMenu)
 
                 mBuilder.setTitle(getString(R.string.delete_title))
                 mBuilder.setMessage(getString(R.string.delete_text))

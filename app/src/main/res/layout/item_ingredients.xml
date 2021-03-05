@@ -31,6 +31,7 @@
         app:layout_constraintEnd_toStartOf="@id/tv_ingredient"
         app:layout_constraintTop_toTopOf="@id/top_line"
         app:layout_constraintBottom_toBottomOf="@id/bottom_line"
+        app:tint="?attr/colorOnBackground"
         tools:ignore="ContentDescription" />
 
     <TextView

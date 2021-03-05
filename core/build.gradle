@@ -11,6 +11,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     defaultConfig {
 //        applicationId "com.hkm.onplate.core"
         minSdkVersion 21
@@ -21,7 +24,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField("String", "API_KEY", MySpoonacularAPIKey)
+        buildConfigField("String", "API_KEY", localProperties['MySpoonacularAPIKey'])
     }
 
     buildTypes {
@@ -30,7 +33,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

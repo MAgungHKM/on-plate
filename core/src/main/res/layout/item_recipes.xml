@@ -32,7 +32,7 @@
         android:gravity="center_vertical"
         android:padding="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="?attr/colorOnBackground"
+        android:textColor="@android:color/white"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="@id/img_recipe"
         app:layout_constraintEnd_toEndOf="parent"

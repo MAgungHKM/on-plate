@@ -2,16 +2,17 @@
     <!-- Base application theme. -->
     <style name="Theme.OnPlate" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/royal_200</item>
+        <item name="colorPrimary">@color/royal_500</item>
         <item name="colorPrimaryVariant">@color/royal_700</item>
-        <item name="colorOnPrimary">@color/gray</item>
+        <item name="colorOnPrimary">@color/colorTextTertiary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/royal_500</item>
         <item name="colorSecondaryVariant">@color/royal_500</item>
-        <item name="colorOnSecondary">@color/gray</item>
+        <item name="colorOnSecondary">@color/colorTextTertiary</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor">@color/gray</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+        <item name="homeAsUpIndicator">@drawable/ic_back_arrow_white</item>
     </style>
 </resources>

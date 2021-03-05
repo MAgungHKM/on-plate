@@ -29,27 +29,28 @@ class OnPlateRepository constructor(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IOnPlateRepository {
-    override fun getAllRecipes(): Flow<Resource<List<Recipe>>> =
-            object : NetworkBoundResource<List<Recipe>, List<RecipeResponse>>() {
-                override fun loadFromDB(): Flow<List<Recipe>> {
-                    return localDataSource.getAllRecipes().map {
-                        DataMapper.mapRecipeEntitiesToItsDomain(it)
-                    }
+    override fun getAllRecipes(): Flow<Resource<List<Recipe>>> {
+        appExecutors.diskIO().execute { localDataSource.emptyRecipes() }
+        return object : NetworkBoundResource<List<Recipe>, List<RecipeResponse>>() {
+            override fun loadFromDB(): Flow<List<Recipe>> {
+                return localDataSource.getAllRecipes().map {
+                    DataMapper.mapRecipeEntitiesToItsDomain(it)
                 }
+            }
 
-                override fun shouldFetch(data: List<Recipe>?): Boolean =
-                        data == null || data.isEmpty()
+            override fun shouldFetch(data: List<Recipe>?): Boolean = true
 
-                override suspend fun createCall(): Flow<ApiResponse<List<RecipeResponse>>> =
-                        remoteDataSource.getRandomRecipes()
+            override suspend fun createCall(): Flow<ApiResponse<List<RecipeResponse>>> =
+                remoteDataSource.getRandomRecipes()
 
-                override suspend fun saveCallResult(data: List<RecipeResponse>?) {
-                    if (data != null) {
-                        val recipeList = DataMapper.mapRecipeResponsesToItsEntities(data)
-                        localDataSource.insertRecipes(recipeList)
-                    }
+            override suspend fun saveCallResult(data: List<RecipeResponse>?) {
+                if (data != null) {
+                    val recipeList = DataMapper.mapRecipeResponsesToItsEntities(data)
+                    localDataSource.insertRecipes(recipeList)
                 }
-            }.asFlow()
+            }
+        }.asFlow()
+    }
 
     override suspend fun loadMoreRecipes() {
         val flow = object : NetworkBoundResource<List<Recipe>, List<RecipeResponse>>() {

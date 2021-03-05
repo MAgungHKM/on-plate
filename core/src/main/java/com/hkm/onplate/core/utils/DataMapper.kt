@@ -202,54 +202,54 @@ object DataMapper {
 
     fun mapFavoriteRecipeEntityToRecipeEntity(input: FavoriteRecipeEntity): RecipeEntity =
             RecipeEntity(
-                    recipeId = input.recipeId,
-                    summary = input.summary,
-                    title = input.title,
-                    score = input.score,
-                    ingredients = input.ingredients,
-                    instructions = input.instructions,
-                    readyTime = input.readyTime,
-                    servings = input.servings,
-                    likes = input.likes,
-                    imageUrl = input.imageUrl,
-                    dishType = input.dishType,
-                    source = input.source,
-                    sourceUrl = input.sourceUrl
+                recipeId = input.recipeId,
+                summary = input.summary,
+                title = input.title,
+                score = input.score,
+                ingredients = input.ingredients,
+                instructions = input.instructions,
+                readyTime = input.readyTime,
+                servings = input.servings,
+                likes = input.likes,
+                imageUrl = input.imageUrl,
+                dishType = input.dishType,
+                source = input.source,
+                sourceUrl = input.sourceUrl
             )
 
-    fun mapRecipeEntityToItsDomain(input: RecipeEntity): Recipe =
-            Recipe(
-                    recipeId = input.recipeId,
-                    summary = input.summary,
-                    title = input.title,
-                    score = input.score,
-                    ingredients = input.ingredients,
-                    instructions = input.instructions,
-                    readyTime = input.readyTime,
-                    servings = input.servings,
-                    likes = input.likes,
-                    imageUrl = input.imageUrl,
-                    dishType = input.dishType,
-                    source = input.source,
-                    sourceUrl = input.sourceUrl
-            )
+    fun mapRecipeEntityToItsDomain(input: RecipeEntity?): Recipe =
+        Recipe(
+            recipeId = input?.recipeId.toString(),
+            summary = input?.summary.toString(),
+            title = input?.title.toString(),
+            score = input?.score.toString(),
+            ingredients = input?.ingredients ?: listOf(),
+            instructions = input?.instructions ?: listOf(),
+            readyTime = input?.readyTime.toString(),
+            servings = input?.servings.toString(),
+            likes = input?.likes.toString(),
+            imageUrl = input?.imageUrl.toString(),
+            dishType = input?.dishType.toString(),
+            source = input?.source.toString(),
+            sourceUrl = input?.sourceUrl.toString(),
+        )
 
     fun mapRecipeDomainToItsPresentation(input: Recipe): PresentationRecipe =
-            PresentationRecipe(
-                    recipeId = input.recipeId,
-                    summary = input.summary,
-                    title = input.title,
-                    score = input.score,
-                    ingredients = input.ingredients,
-                    instructions = input.instructions,
-                    readyTime = input.readyTime,
-                    servings = input.servings,
-                    likes = input.likes,
-                    imageUrl = input.imageUrl,
-                    dishType = input.dishType,
-                    source = input.source,
-                    sourceUrl = input.sourceUrl
-            )
+        PresentationRecipe(
+            recipeId = input.recipeId,
+            summary = input.summary,
+            title = input.title,
+            score = input.score,
+            ingredients = input.ingredients,
+            instructions = input.instructions,
+            readyTime = input.readyTime,
+            servings = input.servings,
+            likes = input.likes,
+            imageUrl = input.imageUrl,
+            dishType = input.dishType,
+            source = input.source,
+            sourceUrl = input.sourceUrl
+        )
 
     fun mapRecipePresentationToItsDomain(input: PresentationRecipe): Recipe =
             Recipe(
