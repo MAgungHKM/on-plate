@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_favorite_recipe">There aren\'t any recipes yet.</string>
+    <string name="favorite_menu">Favorite</string>
+    <string name="delete_title">Delete All Favorite</string>
+    <string name="delete_text">Are you sure you want to delete every recipe from favorite?</string>
+    <string name="delete_confirm_yes">YES</string>
+    <string name="delete_confirm_no">NO</string>
+</resources>

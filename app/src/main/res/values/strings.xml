@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">OnPlate</string>
+    <string name="empty_string"></string>
+    <string name="favorite_menu">Favorite</string>
+    <string name="dummy_recipe_name">Vegetable Salad with Spicy Peanut Sauce</string>
+    <string name="dummy_summary">This is a very delicate dish in Indonesia since time immemorial known to bring fortune to the one consuming it.</string>
+    <string name="text_summary">Summary</string>
+    <string name="dummy_source">Spoonacular</string>
+    <string name="text_source">Recipe Source</string>
+    <string name="dummy_cooking_time">Ready In 45 Minutes</string>
+    <string name="text_cooking_time">Cooking Time</string>
+    <string name="dummy_servings">5 Servings</string>
+    <string name="text_servings">Number of Servings</string>
+    <string name="dummy_appetizer">Indonesia punya, Appetizer</string>
+    <string name="text_ingredients">Ingredients</string>
+    <string name="dummy_ingredient">Kacang Tanah 100gr</string>
+    <string name="text_instructions">Instructions</string>
+    <string name="dummy_instruction">Panggang kacang tanah secara merata</string>
+    <string name="share_recipe">Let\'s try %s out! \n%s</string>
+    <string name="share_title">Share this recipe now!</string>
+    <string name="text_add_favorite">%s has been added to favorite list.</string>
+    <string name="text_remove_favorite">%s has been removed from favorite list.</string>
+    <string name="hint_search">Search recipe here...</string>
+    <string name="no_recipe">Recipe not found.</string>
+</resources>

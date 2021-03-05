@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="royal_200">#cc6d7d</color>
+    <color name="royal_500">#d9384d</color>
+    <color name="royal_700">#b82943</color>
+    <color name="black">#101010</color>
+    <color name="gray">#212121</color>
+    <color name="dim">#AA555555</color>
+</resources>
